@@ -95,6 +95,11 @@ const start = () => {
   formEl.addEventListener('submit', formHandler);
   render();
 
+  const myModalEl = document.getElementById('exampleModal');
+  myModalEl.addEventListener('hide.bs.modal', function (event) {
+    watchedState.postModal.isActive = false;
+  });
+
   const checkNewPosts = (time) => {
     setTimeout(() => {
       watchedState.feeds.forEach((feed) => {
@@ -136,23 +141,22 @@ const start = () => {
   checkNewPosts(defaultTimeoutCheckNewPosts);
 };
 
-const myModalEl = document.getElementById('exampleModal');
-myModalEl.addEventListener('hide.bs.modal', function (event) {
-  watchedState.postModal.isActive = false;
-});
-
 // каждый запуск приложения создаёт свой собственный объект i18n и работает с ним,
 // не меняя глобальный объект.
 const i18nInstance = i18next.createInstance();
-i18nInstance
-  .init({
-    lng: defaultLanguage,
-    debug: false,
-    resources,
-  })
-  .then(function () {
-    // initialized and ready to go!
-    start();
-  });
 
+const startAll = () => {
+  i18nInstance
+    .init({
+      lng: defaultLanguage,
+      debug: false,
+      resources,
+    })
+    .then(function () {
+      // initialized and ready to go!
+      start();
+    });
+};
+
+startAll();
 export { i18nInstance };
