@@ -6,7 +6,7 @@ import {
   showFeedback,
   disableFeedback,
 } from './api/actions/htmlActions';
-import { i18nInstance } from '.';
+import i18nInstance from './i18nInstance';
 
 const state = {
   feeds: [],
@@ -59,8 +59,6 @@ const watchedState = onChange(state, (path, value, previousValue) => {
       const id = newReadPost.id;
 
       const postEl = document.querySelector(`a[data-id='${id}']`);
-      console.log(id);
-      console.log(postEl);
       postEl.classList.remove('fw-bold');
       postEl.classList.add('fw-normal');
 

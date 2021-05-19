@@ -1,7 +1,6 @@
 export default (htmlString) => {
   const parser = new DOMParser();
   const dom = parser.parseFromString(htmlString, 'text/html');
-  console.log(dom);
   const titleEl = dom.querySelector('title');
   const title = titleEl.innerText;
   const descriptionEl = dom.querySelector('description');
