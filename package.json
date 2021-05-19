@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "test": "jest --colors"
+    "test": "jest --colors",
+    "build": "webpack --progress",
+    "start": "webpack-dev-server --progress"
   },
   "repository": {
     "type": "git",
@@ -38,5 +40,12 @@
     "webpack": "5.31.0",
     "webpack-cli": "4.6.0",
     "webpack-dev-server": "3.11.2"
+  },
+  "dependencies": {
+    "axios": "0.21.1",
+    "i18next": "20.2.4",
+    "lodash": "4.17.21",
+    "on-change": "3.0.2",
+    "yup": "0.32.9"
   }
 }
