@@ -65,9 +65,6 @@ const watchedState = onChange(state, (path, value, previousValue) => {
     case 'rssForm.state':
       const error = i18nInstance.t(`formControl.${value}`);
       showFeedback(error);
-      setTimeout(() => {
-        disableFeedback();
-      }, 3000);
       break;
     default:
       break;
