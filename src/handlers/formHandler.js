@@ -20,7 +20,10 @@ const formHandler = (e) => {
     })
     .then((isValid) => {
       if (!isValid) return;
-
+      console.log('HI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log(isValid);
+      console.log(objData.url);
+      console.log('HI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       axios
         .get(
           `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
@@ -28,10 +31,6 @@ const formHandler = (e) => {
           )}`,
         )
         .then((response) => {
-          console.log('HI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-          console.log(response);
-          console.log(response.status);
-          console.log('HI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
           if (response.status === 200) return response.data;
           watchedState.rssForm.state = 'networkError';
           throw new Error('Network response was not ok.');
@@ -60,10 +59,6 @@ const formHandler = (e) => {
           watchedState.posts.push(...postWithId);
         })
         .catch((error) => {
-          // TODO:
-          // - add state.possessing = 'failed' | 'processing' | 'filling'
-          // - add preloader fro processing
-          // - add bootstrap alert for failed
           console.log(error);
         });
     });

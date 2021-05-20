@@ -36,10 +36,6 @@ const updatePosts = (time) => {
           watchedState.posts.push(...postWithId);
         })
         .catch((error) => {
-          // TODO:
-          // - add state.possessing = 'failed' | 'processing' | 'filling'
-          // - add preloader fro processing
-          // - add bootstrap alert for failed
           console.log(error);
         });
     });
