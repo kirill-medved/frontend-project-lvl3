@@ -1,5 +1,6 @@
 // @ts-check
 import * as _ from 'lodash';
+import axios from 'axios';
 
 import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
@@ -7,6 +8,7 @@ import schema from '../yupSchema';
 
 const formHandler = (e) => {
   e.preventDefault();
+
   const formData = new FormData(e.target);
   const objData = Object.fromEntries(formData);
   schema
@@ -19,13 +21,14 @@ const formHandler = (e) => {
     .then((isValid) => {
       if (!isValid) return;
 
-      fetch(
-        `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
-          objData.url.toString(),
-        )}`,
-      )
+      axios
+        .get(
+          `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
+            objData.url.toString(),
+          )}`,
+        )
         .then((response) => {
-          if (response.ok) return response.json();
+          if (response.status === 200) return response.data;
           watchedState.rssForm.state = 'networkError';
           throw new Error('Network response was not ok.');
         })
