@@ -28,7 +28,8 @@ const formHandler = (e) => {
           )}`,
         )
         .then((response) => {
-          if (response.status === 200) return response.data;
+          if (response.status === 200 || response.status === 500)
+            return response.data;
           watchedState.rssForm.state = 'networkError';
           throw new Error('Network response was not ok.');
         })
