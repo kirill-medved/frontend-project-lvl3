@@ -18,7 +18,7 @@ const formHandler = async (e) => {
   documentEl.append(divEl);
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
-  schema
+  await schema
     .validate(objData)
     .catch(function (err) {
       const divEl2 = document.createElement('div');
