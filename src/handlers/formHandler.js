@@ -83,7 +83,7 @@ const formHandler = (e) => {
   const divEl5 = document.createElement('div');
   divEl5.textContent =
     'HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!ENNNNNNDDD';
-  documentEl.append(divEl);
+  documentEl.append(divEl5);
 };
 
 export default formHandler;
