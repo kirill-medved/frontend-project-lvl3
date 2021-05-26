@@ -6,7 +6,7 @@ import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
 import schema from '../yupSchema';
 
-const formHandler = (e) => {
+const formHandler = async (e) => {
   e.preventDefault();
 
   const url = document.querySelector('input[aria-label=url]').value;
