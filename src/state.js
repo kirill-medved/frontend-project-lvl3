@@ -75,7 +75,6 @@ const watchedState = onChange(state, (path, value, previousValue) => {
       } else {
         formSubmitButton.disabled = value;
       }
-      console.log(formSubmitButton);
       break;
     default:
       break;

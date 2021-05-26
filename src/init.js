@@ -12,6 +12,7 @@ const init = () => {
   formEl.addEventListener('submit', (e) => {
     e.preventDefault();
   });
+
   const formSubmitButton = document.querySelector('button[name=add]');
   formSubmitButton.addEventListener('click', formHandler);
 

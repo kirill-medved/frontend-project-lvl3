@@ -6,13 +6,13 @@ import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
 import schema from '../yupSchema';
 
-const formHandler = (e) => {
-  e.preventDefault();
-  const url = document.querySelector('form input[aria-label=url]').value;
+const formHandler = async (e) => {
+  // e.preventDefault();
+
+  const url = document.querySelector('input[aria-label=url]');
   const objData = { url };
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
-  console.log(objData);
   schema
     .validate(objData)
     .catch(function (err) {
