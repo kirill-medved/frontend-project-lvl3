@@ -8,9 +8,11 @@ import schema from '../yupSchema';
 
 const formHandler = (e) => {
   e.preventDefault();
-
-  const formData = new FormData(e.target);
-  const objData = Object.fromEntries(formData);
+  const url = document.querySelector('form input[aria-label=url]').value;
+  const objData = { url };
+  // const formData = new FormData(e.target);
+  // const objData = Object.fromEntries(formData);
+  console.log(objData);
   schema
     .validate(objData)
     .catch(function (err) {

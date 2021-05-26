@@ -9,7 +9,11 @@ const defaultTimeoutCheckNewPosts = 5000;
 
 const init = () => {
   const formEl = document.querySelector('form');
-  formEl.addEventListener('submit', formHandler);
+  formEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+  const formSubmitButton = document.querySelector('button[name=add]');
+  formSubmitButton.addEventListener('click', formHandler);
 
   postsModalHandler();
 
