@@ -80,6 +80,10 @@ const formHandler = (e) => {
           console.log(error);
         });
     });
+  const divEl5 = document.createElement('div');
+  divEl5.textContent =
+    'HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!ENNNNNNDDD';
+  documentEl.append(divEl);
 };
 
 export default formHandler;
