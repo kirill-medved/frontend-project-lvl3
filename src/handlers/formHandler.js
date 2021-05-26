@@ -6,16 +6,25 @@ import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
 import schema from '../yupSchema';
 
-const formHandler = async (e) => {
+const formHandler = (e) => {
   e.preventDefault();
 
   const url = document.querySelector('input[aria-label=url]').value;
   const objData = { url };
+
+  const documentEl = document.querySelector('body');
+  const divEl = document.createElement('div');
+  divEl.textContent =
+    'HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!';
+  documentEl.append(divEl);
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
   schema
     .validate(objData)
     .catch(function (err) {
+      const divEl2 = document.createElement('div');
+      divEl2.textContent = `H2222222222222222222222222222222222222222222222222222222!!${err}`;
+      documentEl.append(divEl2);
       if (!err.errors) return true;
       watchedState.rssForm.state = err.type;
       return false;
@@ -30,6 +39,9 @@ const formHandler = async (e) => {
           )}`,
         )
         .then((response) => {
+          const divEl3 = document.createElement('div');
+          divEl3.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${response.data.contents}`;
+          documentEl.append(divEl3);
           if (response.status === 200) return response.data;
           watchedState.rssForm.isActive = false;
           watchedState.rssForm.state = 'networkError';
@@ -46,6 +58,9 @@ const formHandler = async (e) => {
           }
         })
         .then(({ title, description, posts }) => {
+          const divEl4 = document.createElement('div');
+          divEl4.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${title}`;
+          documentEl.append(divEl4);
           const newFeed = { title, description, url: objData.url.toString() };
           if (_.some(watchedState.feeds, newFeed)) {
             watchedState.rssForm.isActive = false;
