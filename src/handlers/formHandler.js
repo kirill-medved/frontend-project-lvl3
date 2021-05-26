@@ -9,7 +9,7 @@ import schema from '../yupSchema';
 const formHandler = async (e) => {
   // e.preventDefault();
 
-  const url = document.querySelector('input[aria-label=url]');
+  const url = document.querySelector('input[aria-label=url]').value;
   const objData = { url };
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);

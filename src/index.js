@@ -19,3 +19,5 @@ const start = () => {
 };
 
 start();
+
+export default start;
