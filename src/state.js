@@ -17,6 +17,7 @@ const state = {
     currentPost: null,
   },
   rssForm: {
+    isActive: false,
     state: null,
   },
 };
@@ -65,6 +66,16 @@ const watchedState = onChange(state, (path, value, previousValue) => {
     case 'rssForm.state':
       const error = i18nInstance.t(`formControl.${value}`);
       showFeedback(error);
+      break;
+
+    case 'rssForm.isActive':
+      const formSubmitButton = document.querySelector('button[name=add]');
+      if (value) {
+        formSubmitButton.disabled = value;
+      } else {
+        formSubmitButton.disabled = value;
+      }
+      console.log(formSubmitButton);
       break;
     default:
       break;

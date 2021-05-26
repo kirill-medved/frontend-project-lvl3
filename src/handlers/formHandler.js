@@ -20,10 +20,7 @@ const formHandler = (e) => {
     })
     .then((isValid) => {
       if (!isValid) return;
-      console.log('HI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      console.log(isValid);
-      console.log(objData.url);
-      console.log('HI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      watchedState.rssForm.isActive = true;
       axios
         .get(
           `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
@@ -32,6 +29,7 @@ const formHandler = (e) => {
         )
         .then((response) => {
           if (response.status === 200) return response.data;
+          watchedState.rssForm.isActive = false;
           watchedState.rssForm.state = 'networkError';
           throw new Error('Network response was not ok.');
         })
@@ -41,12 +39,14 @@ const formHandler = (e) => {
             const obj = rssParser(data);
             return obj;
           } catch (error) {
+            watchedState.rssForm.isActive = false;
             watchedState.rssForm.state = 'notValid';
           }
         })
         .then(({ title, description, posts }) => {
           const newFeed = { title, description, url: objData.url.toString() };
           if (_.some(watchedState.feeds, newFeed)) {
+            watchedState.rssForm.isActive = false;
             watchedState.rssForm.state = 'exists';
             throw new Error('Network response was not ok.');
           }
@@ -54,6 +54,7 @@ const formHandler = (e) => {
             ...post,
             id: watchedState.posts.length + i + 2,
           }));
+          watchedState.rssForm.isActive = false;
           watchedState.rssForm.state = 'success';
           watchedState.feeds.push(newFeed);
           watchedState.posts.push(...postWithId);
