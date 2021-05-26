@@ -14,7 +14,7 @@ const formHandler = (e) => {
 
   const documentEl = document.querySelector('body');
   const divEl = document.createElement('div');
-  divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${objData}`;
+  divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${objData.url}`;
   documentEl.append(divEl);
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
