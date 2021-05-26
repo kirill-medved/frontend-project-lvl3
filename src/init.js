@@ -1,6 +1,4 @@
 // @ts-check
-// @ts-check
-
 import updatePosts from './api/updatePosts';
 import formHandler from './handlers/formHandler';
 import postsModalHandler from './handlers/postsModalHandler';

@@ -7,7 +7,7 @@ import watchedState from '../state';
 import schema from '../yupSchema';
 
 const formHandler = async (e) => {
-  // e.preventDefault();
+  e.preventDefault();
 
   const url = document.querySelector('input[aria-label=url]').value;
   const objData = { url };
