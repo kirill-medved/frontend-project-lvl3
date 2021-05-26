@@ -18,6 +18,6 @@ const start = () => {
     });
 };
 
-start();
+// start();
 
 export default start;
