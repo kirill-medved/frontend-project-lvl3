@@ -6,11 +6,6 @@ import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
 import schema from '../yupSchema';
 
-axios.defaults.headers = {
-  'Cache-Control': 'no-cache',
-  Pragma: 'no-cache',
-  Expires: '0',
-};
 const formHandler = async (e) => {
   // e.preventDefault();
 
@@ -42,7 +37,7 @@ const formHandler = async (e) => {
     .get(
       `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
         objData.url.toString(),
-      )}`,
+      )}&disableCache=true`,
     )
     .then((response) => {
       const divEl3 = document.createElement('div');
