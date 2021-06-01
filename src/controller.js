@@ -3,14 +3,21 @@ import _ from 'lodash';
 import validateUrl from './validateUrl.js';
 import parseXml from './parseRss.js';
 
-const getRss = (url) => axios.get(`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(url)}&disableCache=true`);
+const getRss = (url) =>
+  axios.get(
+    `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
+      url,
+    )}&disableCache=true`,
+  );
 
 const updateFeeds = (state, url) => {
   getRss(url)
     .then((res) => parseXml(res.data.contents))
     .then(([{ title }, postsContent]) => {
       const feed = state.feeds.find((el) => el.title === title);
-      const oldPosts = state.posts.filter(({ feedId }) => feedId === feed.feedId);
+      const oldPosts = state.posts.filter(
+        ({ feedId }) => feedId === feed.feedId,
+      );
       const newPosts = _.differenceBy(postsContent, oldPosts, 'link');
       const newPostsWithId = newPosts.map((post) => ({
         ...post,
@@ -22,7 +29,12 @@ const updateFeeds = (state, url) => {
     .finally(() => setTimeout(() => updateFeeds(state, url), 5000));
 };
 
-const updateState = ([{ title, description }, postsContent], posts, feeds, feedUrl) => {
+const updateState = (
+  [{ title, description }, postsContent],
+  posts,
+  feeds,
+  feedUrl,
+) => {
   const feedId = _.uniqueId();
   const postsWithId = postsContent.map((post) => {
     _.set(post, 'state', 'active');
@@ -40,11 +52,7 @@ const updateState = ([{ title, description }, postsContent], posts, feeds, feedU
 };
 
 const handleGetRequest = (feedUrl, state) => {
-  const {
-    formState,
-    posts,
-    feeds,
-  } = state;
+  const { formState, posts, feeds } = state;
 
   getRss(feedUrl)
     .then((response) => {
@@ -81,13 +89,15 @@ export default (observer) => (buttonEvent) => {
   const feedUrl = data.get('url');
   const isValid = validateUrl(watchedState.feeds, feedUrl);
 
-  isValid.then(() => {
-    watchedState.formState.processState = 'sending';
-    handleGetRequest(feedUrl, watchedState);
-  }).catch(({ message }) => {
-    watchedState.formState.processSucces = '';
-    watchedState.formState.validError = message;
-    watchedState.formState.processState = 'pending';
-    watchedState.formState.valid = false;
-  });
+  isValid
+    .then(() => {
+      watchedState.formState.processState = 'sending';
+      handleGetRequest(feedUrl, watchedState);
+    })
+    .catch(({ message }) => {
+      watchedState.formState.processSucces = '';
+      watchedState.formState.validError = message;
+      watchedState.formState.processState = 'pending';
+      watchedState.formState.valid = false;
+    });
 };
