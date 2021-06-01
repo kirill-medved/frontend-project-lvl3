@@ -6,4 +6,4 @@ const start = () => {
   init();
 };
 
-export default start;
+start();

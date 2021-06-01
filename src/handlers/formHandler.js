@@ -55,9 +55,10 @@ const formHandler = async (e) => {
         .then((data) => data.contents)
         .then((data) => {
           console.log('get Data');
+          console.log(data);
           try {
             const obj = rssParser(data);
-            console.log(`${Object.entries(obj)}`);
+            console.log(obj);
             return obj;
           } catch (error) {
             console.log('Errororo');
