@@ -32,8 +32,12 @@ const watchedState = onChange(state, (path, value, previousValue) => {
       const newFeeds = _.difference(value, previousValue);
       console.log(newFeeds);
       newFeeds.forEach((feed) => {
+        console.log('CHECK FEED');
+        console.log(feed);
         const liEl = addFeed(feed);
+        console.log(liEl);
         feedsConteinerEl.appendChild(liEl);
+        console.log(feedsConteinerEl);
       });
       break;
 
