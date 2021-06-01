@@ -14,7 +14,7 @@ const formHandler = async (e) => {
 
   const documentEl = document.querySelector('body');
   const divEl = document.createElement('div');
-  divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!`;
+  divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${schema}`;
   documentEl.append(divEl);
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
