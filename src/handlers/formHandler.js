@@ -54,7 +54,7 @@ const formHandler = async (e) => {
         })
         .then((data) => data.contents)
         .then((data) => {
-          console.log('COCU');
+          console.log('get Data');
           try {
             const obj = rssParser(data);
             return obj;
@@ -64,15 +64,19 @@ const formHandler = async (e) => {
           }
         })
         .then(({ title, description, posts }) => {
+          console.log('data valid' + description + title);
           const divEl4 = document.createElement('div');
           divEl4.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${title}`;
           documentEl.append(divEl4);
           const newFeed = { title, description, url: objData.url.toString() };
           if (_.some(watchedState.feeds, newFeed)) {
+            console.log(`check some ${_.some(watchedState.feeds, newFeed)}`);
             watchedState.rssForm.isActive = false;
             watchedState.rssForm.state = 'exists';
-            throw new Error('Network response was not ok.');
+            return;
+            // throw new Error('Network response was not ok.');
           }
+          console.log(`draw feeds and posts`);
           const postWithId = posts.map((post, i) => ({
             ...post,
             id: watchedState.posts.length + i + 2,
