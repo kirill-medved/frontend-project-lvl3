@@ -1,5 +1,6 @@
 // @ts-check
 import i18nInstance from './i18nInstance';
+import * as yup from 'yup';
 
 import updatePosts from './api/updatePosts';
 import formHandler from './handlers/formHandler';
@@ -29,13 +30,22 @@ const init = () => {
     debug: false,
     resources,
   });
-  // .then(function () {
-  //   // initialized and ready to go!
 
-  // })
-  // .catch(() => {
-  //   init();
-  // });
+  yup.setLocale({
+    string: {
+      url: ({ url }) => ({
+        key: i18nInstance.t('formControl.url'),
+        values: { url },
+      }),
+    },
+    mixed: {
+      required: ({ url }) => ({
+        key: i18nInstance.t('formControl.required'),
+        values: { url },
+      }),
+    },
+  });
+
   initHandlers();
 };
 export default init;

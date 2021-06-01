@@ -18,6 +18,7 @@ const formHandler = async (e) => {
   documentEl.append(divEl);
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
+  console.log('Start schema');
   schema
     .validate(objData)
     .catch(function (err) {
@@ -29,57 +30,63 @@ const formHandler = async (e) => {
       return false;
     })
     .then((isValid) => {
+      console.log('schema valid' + Object.entries(isValid));
       if (!isValid) return;
       watchedState.rssForm.isActive = true;
+
+      console.log('start request!');
+      axios
+        .get(
+          `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
+            objData.url.toString(),
+          )}&disableCache=true`,
+        )
+        .then((response) => {
+          console.log('get response' + response);
+          const divEl3 = document.createElement('div');
+          divEl3.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${response.data.contents}`;
+          documentEl.append(divEl3);
+          if (response.status === 200) return response.data;
+          console.log('COCU');
+          watchedState.rssForm.isActive = false;
+          watchedState.rssForm.state = 'networkError';
+          throw new Error('Network response was not ok.');
+        })
+        .then((data) => data.contents)
+        .then((data) => {
+          console.log('COCU');
+          try {
+            const obj = rssParser(data);
+            return obj;
+          } catch (error) {
+            watchedState.rssForm.isActive = false;
+            watchedState.rssForm.state = 'notValid';
+          }
+        })
+        .then(({ title, description, posts }) => {
+          const divEl4 = document.createElement('div');
+          divEl4.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${title}`;
+          documentEl.append(divEl4);
+          const newFeed = { title, description, url: objData.url.toString() };
+          if (_.some(watchedState.feeds, newFeed)) {
+            watchedState.rssForm.isActive = false;
+            watchedState.rssForm.state = 'exists';
+            throw new Error('Network response was not ok.');
+          }
+          const postWithId = posts.map((post, i) => ({
+            ...post,
+            id: watchedState.posts.length + i + 2,
+          }));
+          watchedState.rssForm.isActive = false;
+          watchedState.rssForm.state = 'success';
+          watchedState.feeds.push(newFeed);
+          watchedState.posts.push(...postWithId);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     });
 
-  axios
-    .get(
-      `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
-        objData.url.toString(),
-      )}&disableCache=true`,
-    )
-    .then((response) => {
-      const divEl3 = document.createElement('div');
-      divEl3.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${response.data.contents}`;
-      documentEl.append(divEl3);
-      if (response.status === 200) return response.data;
-      watchedState.rssForm.isActive = false;
-      watchedState.rssForm.state = 'networkError';
-      throw new Error('Network response was not ok.');
-    })
-    .then((data) => data.contents)
-    .then((data) => {
-      try {
-        const obj = rssParser(data);
-        return obj;
-      } catch (error) {
-        watchedState.rssForm.isActive = false;
-        watchedState.rssForm.state = 'notValid';
-      }
-    })
-    .then(({ title, description, posts }) => {
-      const divEl4 = document.createElement('div');
-      divEl4.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${title}`;
-      documentEl.append(divEl4);
-      const newFeed = { title, description, url: objData.url.toString() };
-      if (_.some(watchedState.feeds, newFeed)) {
-        watchedState.rssForm.isActive = false;
-        watchedState.rssForm.state = 'exists';
-        throw new Error('Network response was not ok.');
-      }
-      const postWithId = posts.map((post, i) => ({
-        ...post,
-        id: watchedState.posts.length + i + 2,
-      }));
-      watchedState.rssForm.isActive = false;
-      watchedState.rssForm.state = 'success';
-      watchedState.feeds.push(newFeed);
-      watchedState.posts.push(...postWithId);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
   const divEl5 = document.createElement('div');
   divEl5.textContent =
     'HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!ENNNNNNDDD';

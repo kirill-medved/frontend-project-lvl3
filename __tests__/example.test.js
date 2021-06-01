@@ -58,21 +58,6 @@ const renderContent = () => {
     </div>
   `;
 };
-//   const formEl = screen.getByRole('form');
-
-//   formEl.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//   });
-
-//   const buutonEl = screen.getByRole('button', { name: 'add' });
-//   buutonEl.addEventListener('click', async (e) => {
-//     const divEl = document.createElement('div');
-//     divEl.textContent = 'HIIIIII!!!!!!!!!!!!!!!!!';
-//     await formHandler(e);
-//     const formEl = screen.getByRole('form');
-//     formEl.append(divEl);
-//   });
-// };
 
 describe('findByText Examples', () => {
   beforeEach(async () => {
