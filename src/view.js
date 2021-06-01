@@ -1,7 +1,12 @@
 import onChange from 'on-change';
 
 export default (state, i18nInstance, elements) => {
-  const { form, submitButton, divFeedBack, input } = elements;
+  const {
+    form,
+    submitButton,
+    divFeedBack,
+    input
+  } = elements;
 
   const renderFeedback = (value, style) => {
     elements.divFeedBack.classList.remove('text-success', 'text-danger');
