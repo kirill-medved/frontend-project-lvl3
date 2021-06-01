@@ -7,18 +7,18 @@ import watchedState from '../state';
 import schema from '../yupSchema';
 
 const formHandler = async (e) => {
-  e.preventDefault();
+  // e.preventDefault();
 
   const url = document.querySelector('input[aria-label=url]').value;
   const objData = { url };
 
   const documentEl = document.querySelector('body');
   const divEl = document.createElement('div');
-  divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${objData.url}`;
+  divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!`;
   documentEl.append(divEl);
   // const formData = new FormData(e.target);
   // const objData = Object.fromEntries(formData);
-  await schema
+  schema
     .validate(objData)
     .catch(function (err) {
       const divEl2 = document.createElement('div');
