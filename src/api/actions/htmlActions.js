@@ -9,8 +9,8 @@ const addFeed = (feed) => {
   liEl.classList.add('list-group-item');
   h3El.textContent = feed.title;
   pEL.textContent = feed.description;
-  liEl.append(h3El);
-  liEl.append(pEL);
+  liEl.appendChild(h3El);
+  liEl.appendChild(pEL);
   return liEl;
 };
 
