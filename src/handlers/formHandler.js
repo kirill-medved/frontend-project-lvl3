@@ -6,6 +6,11 @@ import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
 import schema from '../yupSchema';
 
+axios.defaults.headers = {
+  'Cache-Control': 'no-cache',
+  Pragma: 'no-cache',
+  Expires: '0',
+};
 const formHandler = async (e) => {
   // e.preventDefault();
 
