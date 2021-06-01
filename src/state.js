@@ -26,6 +26,7 @@ const watchedState = onChange(state, (path, value, previousValue) => {
   switch (path) {
     // инициализированный объект i18n прокидывается параметром в рендер, чтобы использовать t.
     case 'feeds':
+      console.log("I'm AT FEEDS ");
       const feedsConteinerEl = document.querySelector('#feeds > div > ul');
       const newFeeds = _.difference(value, previousValue);
 
@@ -36,6 +37,7 @@ const watchedState = onChange(state, (path, value, previousValue) => {
       break;
 
     case 'posts':
+      console.log("I'm AT Posts ");
       const postsConteinerEl = document.querySelector('#posts > div > ul');
       const newPosts = _.difference(value, previousValue);
 

@@ -12,12 +12,10 @@ const defaultLanguage = 'ru';
 
 const initHandlers = () => {
   const formEl = document.querySelector('form');
-  formEl.addEventListener('submit', (e) => {
-    e.preventDefault();
-  });
+  formEl.addEventListener('submit', formHandler);
 
-  const formSubmitButton = document.querySelector('button[name=add]');
-  formSubmitButton.addEventListener('click', formHandler);
+  // const formSubmitButton = document.querySelector('button[name=add]');
+  // formSubmitButton.addEventListener('click', formHandler);
 
   postsModalHandler();
 

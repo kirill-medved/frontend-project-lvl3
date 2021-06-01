@@ -7,17 +7,17 @@ import watchedState from '../state';
 import schema from '../yupSchema';
 
 const formHandler = (e) => {
-  // e.preventDefault();
+  e.preventDefault();
   watchedState.rssForm.isActive = true;
-  const url = document.querySelector('input[aria-label=url]').value;
-  const objData = { url };
+  // const url = document.querySelector('input[aria-label=url]').value;
+  // const objData = { url };
 
   const documentEl = document.querySelector('body');
   const divEl = document.createElement('div');
   divEl.textContent = `HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII!!${schema}`;
   documentEl.append(divEl);
-  // const formData = new FormData(e.target);
-  // const objData = Object.fromEntries(formData);
+  const formData = new FormData(e.target);
+  const objData = Object.fromEntries(formData);
   console.log('Start schema');
   schema
     .validate(objData)
