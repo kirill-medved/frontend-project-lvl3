@@ -1,46 +1,48 @@
-// @ts-check
-import i18nInstance from './i18nInstance';
-import * as yup from 'yup';
+import i18n from "i18next";
+import { setLocale } from "yup";
+import resources from "./locales";
+import view from "./view.js";
+import controller from "./controller.js";
 
-import updatePosts from './api/updatePosts';
-import formHandler from './handlers/formHandler';
-import postsModalHandler from './handlers/postsModalHandler';
-import resources from './locales';
+export default () => {
+  const state = {
+    formState: {
+      processState: "pending",
+      processError: null,
+      processSucces: null,
+      valid: true,
+      validError: "",
+    },
+    feeds: [],
+    posts: [],
+  };
 
-const defaultTimeoutCheckNewPosts = 5000;
-const defaultLanguage = 'ru';
+  const defaultLanguage = "ru";
+  const i18nInstance = i18n.createInstance();
 
-const init = () => {
-  console.log('INIT HAS BEEN CALLED');
+  const elements = {
+    form: document.querySelector(".rss-form"),
+    submitButton: document.querySelector('button[type="submit"]'),
+    divFeedBack: document.querySelector(".feedback"),
+    input: document.querySelector(".rss-form input"),
+  };
+
   i18nInstance.init({
     lng: defaultLanguage,
     debug: false,
     resources,
   });
 
-  yup.setLocale({
+  setLocale({
     string: {
-      url: ({ url }) => ({
-        key: i18nInstance.t('formControl.url'),
-        values: { url },
-      }),
+      url: i18nInstance.t("feedback.invalidUrl"),
     },
     mixed: {
-      required: ({ url }) => ({
-        key: i18nInstance.t('formControl.required'),
-        values: { url },
-      }),
+      default: i18nInstance.t("feedback.duplicate"),
     },
   });
 
-  const formEl = document.querySelector('form');
-  formEl.addEventListener('submit', formHandler);
-
-  // const formSubmitButton = document.querySelector('button[name=add]');
-  // formSubmitButton.addEventListener('click', formHandler);
-
-  postsModalHandler();
-
-  updatePosts(defaultTimeoutCheckNewPosts);
+  const watchedState = view(state, i18nInstance, elements);
+  const form = document.querySelector(".rss-form");
+  form.addEventListener("submit", controller(watchedState));
 };
-export default init;
