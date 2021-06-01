@@ -28,8 +28,9 @@ const watchedState = onChange(state, (path, value, previousValue) => {
     case 'feeds':
       console.log("I'm AT FEEDS ");
       const feedsConteinerEl = document.querySelector('#feeds > div > ul');
+      console.log(feedsConteinerEl);
       const newFeeds = _.difference(value, previousValue);
-
+      console.log(newFeeds);
       newFeeds.forEach((feed) => {
         const liEl = addFeed(feed);
         feedsConteinerEl.append(liEl);

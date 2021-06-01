@@ -10,18 +10,6 @@ import resources from './locales';
 const defaultTimeoutCheckNewPosts = 5000;
 const defaultLanguage = 'ru';
 
-const initHandlers = () => {
-  const formEl = document.querySelector('form');
-  formEl.addEventListener('submit', formHandler);
-
-  // const formSubmitButton = document.querySelector('button[name=add]');
-  // formSubmitButton.addEventListener('click', formHandler);
-
-  postsModalHandler();
-
-  updatePosts(defaultTimeoutCheckNewPosts);
-};
-
 const init = () => {
   i18nInstance.init({
     lng: defaultLanguage,
@@ -44,6 +32,14 @@ const init = () => {
     },
   });
 
-  initHandlers();
+  const formEl = document.querySelector('form');
+  formEl.addEventListener('submit', formHandler);
+
+  // const formSubmitButton = document.querySelector('button[name=add]');
+  // formSubmitButton.addEventListener('click', formHandler);
+
+  postsModalHandler();
+
+  updatePosts(defaultTimeoutCheckNewPosts);
 };
 export default init;
