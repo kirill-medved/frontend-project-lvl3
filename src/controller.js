@@ -3,11 +3,8 @@ import _ from 'lodash';
 import validateUrl from './validateUrl.js';
 import parseXml from './parseRss.js';
 
-const getRss = (url) =>
-  axios.get(`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
-      url,
-    )}&disableCache=true`,
-  );
+const getRss = (url) => axios.get(`https://hexlet-allorigins.herokuapp.com/get?url=${
+	encodeURIComponent(url)}&disableCache=true`);
 
 const updateFeeds = (state, url) => {
   getRss(url)
@@ -24,7 +21,7 @@ const updateFeeds = (state, url) => {
       }));
       state.posts.unshift(...newPostsWithId);
     })
-    .catch((err) => console.log(err))
+    .catch((err) => err)
     .finally(() => setTimeout(() => updateFeeds(state, url), 5000));
 };
 

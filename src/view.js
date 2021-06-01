@@ -5,7 +5,7 @@ export default (state, i18nInstance, elements) => {
     form,
     submitButton,
     divFeedBack,
-    input
+    input,
   } = elements;
 
   const renderFeedback = (value, style) => {
