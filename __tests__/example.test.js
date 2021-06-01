@@ -76,8 +76,8 @@ const renderContent = () => {
 
 describe('findByText Examples', () => {
   beforeEach(async () => {
-    renderContent();
-    start();
+    await renderContent();
+    await start();
   });
 
   it('should work', async () => {

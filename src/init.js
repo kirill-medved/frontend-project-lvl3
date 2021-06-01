@@ -1,11 +1,15 @@
 // @ts-check
+import i18nInstance from './i18nInstance';
+
 import updatePosts from './api/updatePosts';
 import formHandler from './handlers/formHandler';
 import postsModalHandler from './handlers/postsModalHandler';
+import resources from './locales';
 
 const defaultTimeoutCheckNewPosts = 5000;
+const defaultLanguage = 'ru';
 
-const init = () => {
+const initHandlers = () => {
   const formEl = document.querySelector('form');
   formEl.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -19,4 +23,19 @@ const init = () => {
   updatePosts(defaultTimeoutCheckNewPosts);
 };
 
+const init = () => {
+  i18nInstance.init({
+    lng: defaultLanguage,
+    debug: false,
+    resources,
+  });
+  // .then(function () {
+  //   // initialized and ready to go!
+
+  // })
+  // .catch(() => {
+  //   init();
+  // });
+  initHandlers();
+};
 export default init;
