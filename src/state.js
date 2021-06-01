@@ -37,7 +37,7 @@ const watchedState = onChange(state, (path, value, previousValue) => {
         const liEl = addFeed(feed);
         console.log(liEl);
         feedsConteinerEl.append(liEl);
-        console.log(feedsConteinerEl);
+        console.log(feedsConteinerEl.childNodes);
       });
       break;
 
