@@ -33,7 +33,7 @@ const watchedState = onChange(state, (path, value, previousValue) => {
       console.log(newFeeds);
       newFeeds.forEach((feed) => {
         const liEl = addFeed(feed);
-        feedsConteinerEl.append(liEl);
+        feedsConteinerEl.appendChild(liEl);
       });
       break;
 
@@ -44,7 +44,7 @@ const watchedState = onChange(state, (path, value, previousValue) => {
 
       newPosts.forEach((post) => {
         const liEl = addPost(post);
-        postsConteinerEl.append(liEl);
+        postsConteinerEl.appendChild(liEl);
       });
       break;
 
