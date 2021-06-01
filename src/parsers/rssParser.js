@@ -2,9 +2,9 @@ export default (htmlString) => {
   const parser = new DOMParser();
   const dom = parser.parseFromString(htmlString, 'text/html');
   const titleEl = dom.querySelector('title');
-  const title = titleEl.innerText;
+  const title = titleEl.textContent;
   const descriptionEl = dom.querySelector('description');
-  const description = descriptionEl.innerText;
+  const description = descriptionEl.textContent;
   const postItems = dom.querySelectorAll('item');
   const posts = [...postItems].map((post) => {
     const postTitleEl = post.querySelector('title');

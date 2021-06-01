@@ -6,9 +6,9 @@ import rssParser from '../parsers/rssParser';
 import watchedState from '../state';
 import schema from '../yupSchema';
 
-const formHandler = async (e) => {
+const formHandler = (e) => {
   // e.preventDefault();
-
+  watchedState.rssForm.isActive = true;
   const url = document.querySelector('input[aria-label=url]').value;
   const objData = { url };
 
@@ -32,7 +32,6 @@ const formHandler = async (e) => {
     .then((isValid) => {
       console.log('schema valid' + Object.entries(isValid));
       if (!isValid) return;
-      watchedState.rssForm.isActive = true;
 
       console.log('start request!');
       axios
