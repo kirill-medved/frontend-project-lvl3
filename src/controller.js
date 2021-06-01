@@ -4,7 +4,7 @@ import validateUrl from './validateUrl.js';
 import parseXml from './parseRss.js';
 
 const getRss = (url) => axios.get(`https://hexlet-allorigins.herokuapp.com/get?url=${
-	encodeURIComponent(url)}&disableCache=true`);
+  encodeURIComponent(url)}&disableCache=true`);
 
 const updateFeeds = (state, url) => {
   getRss(url)
