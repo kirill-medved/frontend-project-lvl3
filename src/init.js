@@ -11,6 +11,7 @@ const defaultTimeoutCheckNewPosts = 5000;
 const defaultLanguage = 'ru';
 
 const init = () => {
+  console.log('INIT HAS BEEN CALLED');
   i18nInstance.init({
     lng: defaultLanguage,
     debug: false,
