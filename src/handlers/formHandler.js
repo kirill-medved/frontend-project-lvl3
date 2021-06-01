@@ -57,8 +57,10 @@ const formHandler = async (e) => {
           console.log('get Data');
           try {
             const obj = rssParser(data);
+            console.log(`${Object.entries(obj)}`);
             return obj;
           } catch (error) {
+            console.log('Errororo');
             watchedState.rssForm.isActive = false;
             watchedState.rssForm.state = 'notValid';
           }
